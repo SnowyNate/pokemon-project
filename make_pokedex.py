@@ -13,7 +13,7 @@ def make_list(s):
 
 pokemon_list = make_list(text)
 
-def turn_dict(twodlist):
+def dict2(twodic):
     d = {}
     headers = twodlist[0]
     
@@ -34,5 +34,23 @@ def turn_dict(twodlist):
 
     return d
 
+def turn_dict(twodlist):
+	d = {}
+	twodlist.pop(0)
+	for x in twodlist:
+    	if x[2] in d:
+        	d[x[2]].append(x)
+    	else:
+        	d[x[2]]=[x]
+    	if x[3] != '':
+        	if x[3] in d:
+            	d[x[3]].append(x)
+        	if not(x[3] in d):
+            	d[x[3]]=[x]
+	return d
+
 two = turn_dict(pokemon_list)
 pprint(two)
+
+with open("pokemon.html", "w") as f:
+	f.write('<html><head><title>Pokedex<title><head><html>\n')
