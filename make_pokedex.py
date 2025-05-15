@@ -25,10 +25,10 @@ def dict2(twodic):
         
         if type1 not in d:
             d[type1] = {}
-        d[type1][name] = dict(zip(headers, data))
+        d[type1][name] = dict(zip(headers, data))                                                
         
         if type2 != "''":
-            if type2 not in d:
+            if type2 not in d: 
                 d[type2] = {}
             d[type2][name] = dict(zip(headers, data))
 
@@ -36,6 +36,28 @@ def dict2(twodic):
 
 D2 = dict2(pokemon_list)
 pprint(D2)
+
+with open("home.html", "w") as f:
+    f.write('<html><head><title>Home<title><head><html>\n')
+    
+with open("home.css", "w") as f:
+    f.write('\n')
+    
+for type in D2.keys():
+    with open(f"{type}.html", "w") as f:
+        f.write(f"<html><head><title>{type}<title><head><html>\n")
+        
+with open("top10.html", "w") as f:
+    f.write('<html><head><title>Top 10<title><head><html>\n')
+
+
+
+
+
+
+
+
+### CODE GRAVEYARD
 '''
 def turn_dict(twodlist):
     d = {}
@@ -55,13 +77,3 @@ def turn_dict(twodlist):
 two = turn_dict(pokemon_list)
 pprint(two)
 '''
-with open("pokemon.html", "w") as f:
-    f.write('<html><head><title>Pokedex<title><head><html>\n')
-    
-for type in D2.keys():
-    with open(f"{type}.html", "w") as f:
-        f.write(f"<html><head><title>{type}<title><head><html>\n")
-        
-with open("top10.html", "w") as f:
-    f.write('<html><head><title>Top 10<title><head><html>\n')
-
