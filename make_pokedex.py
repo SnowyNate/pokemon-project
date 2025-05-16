@@ -35,10 +35,10 @@ def dict2(twodic):
     return d
 
 D2 = dict2(pokemon_list)
-pprint(D2)
+print(D2)
 
 with open("home.html", "w") as f:
-    f.write('<html><head><title>Home<title><head><html>\n')
+    f.write('<!DOCTYPE html>\n<html lang="en">\n\t<head>\n\t\t<title>Home</title>\n')
     
 with open("home.css", "w") as f:
     f.write('\n')
