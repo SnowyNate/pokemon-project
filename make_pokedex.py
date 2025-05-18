@@ -65,31 +65,57 @@ nav_bar = '''
 '''
 
 nav_bar_css = '''
-ul {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-    overflow: hidden;
-    background-color: transparent;
+nav ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  background-color: transparent;
+  display: flex;
+  justify-content: flex-end;
+  position: relative;
 }
 
-li {
-    float: right;
+nav ul li {
+  position: relative;
 }
 
-li a {
-    display: block;
-    color: black;
-    text-align: center;
-    padding: 20px 30px;
-    text-decoration: none;
-    top: 0%;
-    font-size: 20px;
-    font-family: "Montserrat";
+nav ul li a {
+  display: block;
+  color: black;
+  padding: 20px 30px;
+  text-decoration: none;
+  font-size: 20px;
+  font-family: "Montserrat";
 }
 
-li a:hover {
-    background-color: #1bb828;
+nav ul li:hover > a {
+  background-color: #1bb828;
+}
+
+nav ul li ul.dropdown {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background-color: #333;
+  min-width: 160px;
+  z-index: 1000;
+  flex-direction: column;
+}
+
+nav ul li:hover ul.dropdown {
+  display: flex;
+}
+
+nav ul li ul.dropdown li a {
+  color: white;
+  padding: 12px 16px;
+  background-color: #333;
+  text-align: left;
+}
+
+nav ul li ul.dropdown li a:hover {
+  background-color: #1bb828;
 }
 '''
 
@@ -128,10 +154,23 @@ css_code = '''
     z-index: 0;
     }
     '''
+def create_nav(D2):
+    html = "<nav><ul>"
+    html += "<li><a href='testHome.html'>Home</a></li>"
+    html += "<li><a href='#'>Types</a><ul class='dropdown'>"
+    
+    for x in D2.keys():
+        html += f"<li><a href='{x}.html'>{x}</a></li>"
+    
+    html += "</ul></li>"  # close dropdown
+    html += "<li><a href='top10.html'>Top 10</a></li>"
+    html += "<li><a href='Pokedex.html'>Pokedex</a></li>"
+    html += "</ul></nav>"
+    return html
 
 with open("testHome.html", "w") as f:
     f.write('<!DOCTYPE html>\n<html lang="en">\n\t<head>\n\t\t<title>Home</title>\n')
-    f.write(nav_bar)
+    f.write(create_nav(D2))
     f.write(html_code)
     
 with open("testHome.css", "w") as f:
