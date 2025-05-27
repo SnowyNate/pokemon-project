@@ -1,7 +1,7 @@
 from pprint import pprint
 #paste the output (or pipe the output) of this program to the pokedex.html file.
 
-text = open('pokemon.csv').read().strip().split('\n')
+text = open('test.csv').read().strip().split('\n')
 
 #print(text)
 
@@ -35,7 +35,37 @@ def dict2(twodic):
     return d
 
 D2 = dict2(pokemon_list)
-print(D2)
+pprint(D2)
+
+# ====================ALL POKEMON========================
+# utilizes pokemon_list from line 14
+# some code was inspired/debugged by AI or StackExchange
+headers = pokemon_list[0]
+rows = pokemon_list[1:]
+
+with open('all.html', 'w') as file:
+    file.write("<!DOCTYPE html>\n<html>\n<head>\n<title>All Pokemon</title>\n</head>\n<body>\n<h1>All Pokemon</h1>\n<table border='1' style='border-collapse: collapse;'>\n")
+    file.write("<tr>")
+    for header in headers:
+        file.write(f"<th style='padding: 5px;'>{header}</th>")
+    file.write("</tr>\n")
+    for row in rows:
+        file.write("<tr>")
+        for cell in row:
+            file.write(f"<td style='padding: 5px;'>{cell}</td>")
+        file.write("</tr>\n")
+    file.write("</table>\n</body>\n</html>")
+    
+
+
+
+
+
+
+
+
+
+
 
 html_code = '''
     <link rel="stylesheet" href="testHome.css" />
