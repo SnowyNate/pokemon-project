@@ -5,6 +5,18 @@ text = open('test.csv').read().strip().split('\n')
 
 #print(text)
 
+#str-> 2D list
+#takes a string and turns this into a 2D list where they are first separated by line then by spaces
+#first 5 items should look like:
+#Author is Alex
+'''
+[['#', 'Name', 'Type 1', 'Type 2', 'Total', 'HP', 'Attack', 'Defense', 'Sp. Atk', 'Sp. Def', 'Speed', 'Generation', 'Legendary'],
+['1', 'Bulbasaur', 'Grass', 'Poison', '318', '45', '49', '49', '65', '65', '45', '1', 'False'],
+['2', 'Ivysaur', 'Grass', 'Poison', '405', '60', '62', '63', '80', '80', '60', '1', 'False'],
+['3', 'Venusaur', 'Grass', 'Poison', '525', '80', '82', '83', '100', '100', '80', '1', 'False'],
+['4', 'Charmander', 'Fire', '', '309', '39', '52', '43', '60', '50', '65', '1', 'False']]
+'''
+
 def make_list(s):
     data = []
     for pokemon in s:
@@ -13,22 +25,37 @@ def make_list(s):
 
 pokemon_list = make_list(text)
 
+print(pokemon_list[:5])
+
+#Author is Alex (mine got overwritten :( )
+#list -> dictionary
+#takes a 2d list and returns a dictionary in a dictionary (Alex cooked it and did one in a dictionary in a dictionary)
+#It also assigns parts of the header to the actual value
+#Originally:
+'''
+{'Grass': {'Bulbasaur':['#: 1', 'Name: Bulbauaur'....}....}
+'''
+#now:
+'''
+{'Grass':{'Bulbasaur': {'#': '1', 'Name': 'Bulbasaur',...}...}...}
+'''
+
 def dict2(twodic):
     d = {}
     headers = twodic[0]
-    
-    for row in twodic[1:]:  
-        data = row  
-        name = data[1]  
+
+    for row in twodic[1:]:
+        data = row
+        name = data[1]
         type1 = data[2]
         type2 = data[3]
-        
+
         if type1 not in d:
             d[type1] = {}
-        d[type1][name] = dict(zip(headers, data))                                                
-        
+        d[type1][name] = dict(zip(headers, data))
+
         if type2 != "''":
-            if type2 not in d: 
+            if type2 not in d:
                 d[type2] = {}
             d[type2][name] = dict(zip(headers, data))
 
@@ -70,7 +97,7 @@ with open('all.html', 'w') as file:
 html_code = '''
     <link rel="stylesheet" href="testHome.css" />
     </head>
-    <body>    
+    <body>
          <div class="background"></div>
          <div class="content">
          <h1>Gen 1 Pokemon</h1>
@@ -184,37 +211,46 @@ css_code = '''
     z-index: 0;
     }
     '''
+
+#Author is Ajmira
+#dictionary-> html code
+#function writes the code for a navbar given a dictionary
+#how is a test supposed to work for this????
+#should show the navbar and dropdown and clicking on it will take you to the respective page
 def create_nav(D2):
     html = "<nav><ul>"
     html += "<li><a href='testHome.html'>Home</a></li>"
     html += "<li><a href='#'>Types</a><ul class='dropdown'>"
-    
+
     for x in D2.keys():
         html += f"<li><a href='{x}.html'>{x}</a></li>"
-    
+
     html += "</ul></li>"  # close dropdown
     html += "<li><a href='top10.html'>Top 10</a></li>"
     html += "<li><a href='Pokedex.html'>Pokedex</a></li>"
     html += "</ul></nav>"
     return html
 
+#Nate wrote these codes (hey they count as functions!!)
+#writes files needed for the project
+# thats it! it should open new files!!
 with open("testHome.html", "w") as f:
     f.write('<!DOCTYPE html>\n<html lang="en">\n\t<head>\n\t\t<title>Home</title>\n')
     f.write(create_nav(D2))
     f.write(html_code)
-    
+
 with open("testHome.css", "w") as f:
     f.write('\n')
     f.write(css_code)
     f.write(nav_bar_css)
-    
+
 for type in D2.keys():
     with open(f"{type}.html", "w") as f:
         f.write(f"<html><head><title>{type}<title><head><html>\n")
-        
+
 with open("top10.html", "w") as f:
     f.write('<html><head><title>Top 10<title><head><html>\n')
-    
+
 with open("Pokedex.html", "w") as f:
     f.write('<html><head><title>Pokedex<title><head><html>\n')
 
@@ -226,6 +262,12 @@ with open("Pokedex.html", "w") as f:
 
 
 ### CODE GRAVEYARD
+# list -> dictionary
+#function turns a 2D list into a dictionary where keys are types and values are list of a lists of characters
+#[['Hello'],['So','fun!'],['This','should','work!']['1']] ->
+#{Grass:[[1,'Bulbauser',...]...]}
+#Author is Ajmira
+
 '''
 def turn_dict(twodlist):
     d = {}
