@@ -64,25 +64,6 @@ def dict2(twodic):
 D2 = dict2(pokemon_list)
 print(D2)
 
-# ====================ALL POKEMON========================
-# utilizes pokemon_list from line 14
-# some code was inspired/debugged by AI or StackExchange
-headers = pokemon_list[0]
-rows = pokemon_list[1:]
-
-with open('all.html', 'w') as file:
-    file.write("<!DOCTYPE html>\n<html>\n<head>\n<title>All Pokemon</title>\n</head>\n<body>\n<h1>All Pokemon</h1>\n<table border='1' style='border-collapse: collapse;'>\n")
-    file.write("<tr>")
-    for header in headers:
-        file.write(f"<th style='padding: 5px;'>{header}</th>")
-    file.write("</tr>\n")
-    for row in rows:
-        file.write("<tr>")
-        for cell in row:
-            file.write(f"<td style='padding: 5px;'>{cell}</td>")
-        file.write("</tr>\n")
-    file.write("</table>\n</body>\n</html>")
-
 # =====================NAV BAR========================
 # Author: Ajmira
 # dictionary -> html code
@@ -253,15 +234,54 @@ with open("Home.css", "w") as f:
 
 # ======================END HOME PAGE========================
 
-for type in D2.keys():
-    with open(f"{type}.html", "w") as f:
-        f.write(f"<html><head><title>{type}<title><head><html>\n")
+# =====================POKEDEX========================
+# utilizes pokemon_list from line 14
+# some code was inspired/debugged by AI or StackExchange
+headers = pokemon_list[0]
+rows = pokemon_list[1:]
+
+with open('pokedex.html', 'w') as file:
+    file.write("<!DOCTYPE html>\n<html>\n<head>\n<title>All Pokemon</title>\n</head>\n<body>\n<h1>All Pokemon</h1>\n<table border='1' style='border-collapse: collapse;'>\n")
+    file.write("<tr>")
+    for header in headers:
+        file.write(f"<th style='padding: 5px;'>{header}</th>")
+    file.write("</tr>\n")
+    for row in rows:
+        file.write("<tr>")
+        for cell in row:
+            file.write(f"<td style='padding: 5px;'>{cell}</td>")
+        file.write("</tr>\n")
+    file.write("</table>\n</body>\n</html>")
+
+# ======================END POKEDEX========================
+
+# =====================TYPE========================
+for type in D2:
+    pokemons = D2[type]
+    with open(type + ".html", "w") as f:
+        f.write("<!DOCTYPE html>\n<html>\n<head>\n<title>" + type + " Type Pokemon</title>\n</head>\n<body>\n")
+        f.write("<h1>" + type + " Type Pokemon</h1>\n")
+        if len(pokemons) > 0:
+            headers = list(list(pokemons.values())[0].keys())
+            f.write("<table border='1' style='border-collapse: collapse;'>\n<tr>")
+            for header in headers:
+                f.write("<th style='padding: 5px;'>" + header + "</th>")
+            f.write("</tr>\n")
+            for name in pokemons:
+                pokemon = pokemons[name]
+                f.write("<tr>")
+                for header in headers:
+                    f.write("<td style='padding: 5px;'>" + pokemon[header] + "</td>")
+                f.write("</tr>\n")
+            f.write("</table>\n")
+        else:
+            f.write("<p>No Pokemon of this type.</p>\n")
+        f.write("</body>\n</html>")
+
+# =====================END TYPE========================
 
 with open("top10.html", "w") as f:
     f.write('<html><head><title>Top 10<title><head><html>\n')
-
-with open("Pokedex.html", "w") as f:
-    f.write('<html><head><title>Pokedex<title><head><html>\n')
 
 
 
