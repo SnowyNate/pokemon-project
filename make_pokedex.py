@@ -4,11 +4,12 @@ from pprint import pprint
 text = open('pokemon.csv').read().strip().split('\n')
 
 #print(text)
+# ======================2D LIST========================
+#Author: Alex
+#string-> 2D list
+#takes a string and turns this into a 2D list
+#where they are first separated by newlines then by spaces
 
-#str-> 2D list
-#takes a string and turns this into a 2D list where they are first separated by line then by spaces
-#first 5 items should look like:
-#Author is Alex
 '''
 [['#', 'Name', 'Type 1', 'Type 2', 'Total', 'HP', 'Attack', 'Defense', 'Sp. Atk', 'Sp. Def', 'Speed', 'Generation', 'Legendary'],
 ['1', 'Bulbasaur', 'Grass', 'Poison', '318', '45', '49', '49', '65', '65', '45', '1', 'False'],
@@ -27,15 +28,19 @@ pokemon_list = make_list(text)
 
 print(pokemon_list[:5])
 
-#Author is Alex (mine got overwritten :( )
+# ======================END 2D LIST========================
+
+# ======================DICTIONARY========================
+#Author is Alex
 #list -> dictionary
 #takes a 2d list and returns a dictionary in a dictionary (Alex cooked it and did one in a dictionary in a dictionary)
 #It also assigns parts of the header to the actual value
-#Originally:
+
+# Originally:
 '''
-{'Grass': {'Bulbasaur':['#: 1', 'Name: Bulbauaur'....}....}
+{'Grass': {'Bulbasaur':['#: 1', 'Name: Bulbauaur'....]...}....}
 '''
-#now:
+# Now:
 '''
 {'Grass':{'Bulbasaur': {'#': '1', 'Name': 'Bulbasaur',...}...}...}
 '''
@@ -68,7 +73,8 @@ print(D2)
 # Author: Ajmira
 # dictionary -> html code
 # Writes the code for a navbar given a dictionary
-# Should show the navbar as well as a dropdown section, clicking on a section will take you to the respective page
+# Should show the navbar as well as a dropdown section,
+# clicking on a section will take you to the respective page
 
 nav_bar_css = '''
 nav {
@@ -152,7 +158,8 @@ def create_nav(D2):
 # =====================END NAV BAR========================
 
 # ======================HOME PAGE========================
-
+# Author: Nathaniel
+# Outputs html code in an html file named "Home.html"
 home_html = '''
     <link rel="stylesheet" href="Home.css" />
     </head>
@@ -219,9 +226,6 @@ html, body {
 }
 '''
 
-#Nate wrote these codes (hey they count as functions!!)
-#writes files needed for the project
-# thats it! it should open new files!!
 with open("Home.html", "w") as f:
     f.write('<!DOCTYPE html>\n<html lang="en">\n\t<head>\n\t\t<title>Home</title>\n')
     f.write(create_nav(D2))
@@ -291,11 +295,11 @@ with open("top10.html", "w") as f:
 
 
 ### CODE GRAVEYARD
+# Author: Ajmira
 # list -> dictionary
 #function turns a 2D list into a dictionary where keys are types and values are list of a lists of characters
 #[['Hello'],['So','fun!'],['This','should','work!']['1']] ->
 #{Grass:[[1,'Bulbauser',...]...]}
-#Author is Ajmira
 
 '''
 def turn_dict(twodlist):
