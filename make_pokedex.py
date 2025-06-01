@@ -82,37 +82,12 @@ with open('all.html', 'w') as file:
             file.write(f"<td style='padding: 5px;'>{cell}</td>")
         file.write("</tr>\n")
     file.write("</table>\n</body>\n</html>")
-    
 
-
-
-
-
-
-
-
-
-
-
-html_code = '''
-    <link rel="stylesheet" href="Home.css" />
-    </head>
-    <body>
-         <div class="background"></div>
-         <div class="content">
-         <h1>Gen 1 Pokemon</h1>
-         <h3>Nathaniel Moy, Alex Zheng, Ajmira Islam</h3>
-         <div class="intro-text">
-             <p>
-             A reference guide for 151 pokemon characters of varying types and categories. This guide comes with multiple sections, a whole Pokedex for all 151 characters, a Top 10 section of our personally curated selection of pokemon, and sections for each type of pokemon.
-             </p>
-             <div style="height:300px;"></div>
-             <h3>Snorlax</h3>
-             <p>We chose Snorlax as our first partner pokemon because it is what we all aspire to be after our APs at Stuy, but are strictly prohibited from becoming.</p>
-         </div>
-         </div>
-    </body>
-    '''
+# =====================NAV BAR========================
+# Author: Ajmira
+# dictionary -> html code
+# Writes the code for a navbar given a dictionary
+# Should show the navbar as well as a dropdown section, clicking on a section will take you to the respective page
 
 nav_bar_css = '''
 nav {
@@ -179,6 +154,44 @@ nav ul li ul.dropdown li a:hover {
 }
 '''
 
+def create_nav(D2):
+    html = "<nav><ul>"
+    html += "<li><a href='Home.html'>Home</a></li>"
+    html += "<li><a href='#'>Types</a><ul class='dropdown'>"
+
+    for x in D2.keys():
+        html += f"<li><a href='{x}.html'>{x}</a></li>"
+
+    html += "</ul></li>"  # close dropdown
+    html += "<li><a href='top10.html'>Top 10</a></li>"
+    html += "<li><a href='Pokedex.html'>Pokedex</a></li>"
+    html += "</ul></nav>"
+    return html
+
+# =====================END NAV BAR========================
+
+# ======================HOME PAGE========================
+
+home_html = '''
+    <link rel="stylesheet" href="Home.css" />
+    </head>
+    <body>
+         <div class="background"></div>
+         <div class="content">
+         <h1>Gen 1 Pokemon</h1>
+         <h3>Nathaniel Moy, Alex Zheng, Ajmira Islam</h3>
+         <div class="intro-text">
+             <p>
+             A reference guide for 151 pokemon characters of varying types and categories. This guide comes with multiple sections, a whole Pokedex for all 151 characters, a Top 10 section of our personally curated selection of pokemon, and sections for each type of pokemon.
+             </p>
+             <div style="height:300px;"></div>
+             <h3>Snorlax</h3>
+             <p>We chose Snorlax as our first partner pokemon because it is what we all aspire to be after our APs at Stuy, but are strictly prohibited from becoming.</p>
+         </div>
+         </div>
+    </body>
+    '''
+
 home_css = '''
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
 
@@ -225,38 +238,20 @@ html, body {
 }
 '''
 
-
-#Author is Ajmira
-#dictionary-> html code
-#function writes the code for a navbar given a dictionary
-#how is a test supposed to work for this????
-#should show the navbar and dropdown and clicking on it will take you to the respective page
-def create_nav(D2):
-    html = "<nav><ul>"
-    html += "<li><a href='Home.html'>Home</a></li>"
-    html += "<li><a href='#'>Types</a><ul class='dropdown'>"
-
-    for x in D2.keys():
-        html += f"<li><a href='{x}.html'>{x}</a></li>"
-
-    html += "</ul></li>"  # close dropdown
-    html += "<li><a href='top10.html'>Top 10</a></li>"
-    html += "<li><a href='Pokedex.html'>Pokedex</a></li>"
-    html += "</ul></nav>"
-    return html
-
 #Nate wrote these codes (hey they count as functions!!)
 #writes files needed for the project
 # thats it! it should open new files!!
 with open("Home.html", "w") as f:
     f.write('<!DOCTYPE html>\n<html lang="en">\n\t<head>\n\t\t<title>Home</title>\n')
     f.write(create_nav(D2))
-    f.write(html_code)
+    f.write(home_html)
 
 with open("Home.css", "w") as f:
     f.write('\n')
     f.write(home_css)
     f.write(nav_bar_css)
+
+# ======================END HOME PAGE========================
 
 for type in D2.keys():
     with open(f"{type}.html", "w") as f:
