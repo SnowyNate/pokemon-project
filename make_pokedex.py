@@ -4,11 +4,12 @@ from pprint import pprint
 text = open('pokemon.csv').read().strip().split('\n')
 
 #print(text)
-
-#str-> 2D list
-#takes a string and turns this into a 2D list where they are first separated by line then by spaces
+# =====================2D LIST========================
+#Author: Alex
+#string-> 2D list
+#takes a string and turns this into a 2D list
+#where they are first separated by line then by spaces
 #first 5 items should look like:
-#Author is Alex
 '''
 [['#', 'Name', 'Type 1', 'Type 2', 'Total', 'HP', 'Attack', 'Defense', 'Sp. Atk', 'Sp. Def', 'Speed', 'Generation', 'Legendary'],
 ['1', 'Bulbasaur', 'Grass', 'Poison', '318', '45', '49', '49', '65', '65', '45', '1', 'False'],
@@ -27,13 +28,16 @@ pokemon_list = make_list(text)
 
 print(pokemon_list[:5])
 
-#Author is Alex (mine got overwritten :( )
+
+# =====================Dictionary========================
+#Author: Alex (mine got overwritten :( )
 #list -> dictionary
-#takes a 2d list and returns a dictionary in a dictionary (Alex cooked it and did one in a dictionary in a dictionary)
+#takes a 2d list and returns a dictionary in a dictionary
+#(Alex cooked it and did one in a dictionary in a dictionary)
 #It also assigns parts of the header to the actual value
 #Originally:
 '''
-{'Grass': {'Bulbasaur':['#: 1', 'Name: Bulbauaur'....}....}
+{'Grass': {'Bulbasaur':['#: 1', 'Name: Bulbauaur'....]...}....}
 '''
 #now:
 '''
@@ -64,11 +68,32 @@ def dict2(twodic):
 D2 = dict2(pokemon_list)
 print(D2)
 
+# ====================ALL POKEMON========================
+#Author: Nate
+# utilizes pokemon_list from line 14
+# some code was inspired/debugged by AI or StackExchange
+headers = pokemon_list[0]
+rows = pokemon_list[1:]
+
+with open('all.html', 'w') as file:
+    file.write("<!DOCTYPE html>\n<html>\n<head>\n<title>All Pokemon</title>\n</head>\n<body>\n<h1>All Pokemon</h1>\n<table border='1' style='border-collapse: collapse;'>\n")
+    file.write("<tr>")
+    for header in headers:
+        file.write(f"<th style='padding: 5px;'>{header}</th>")
+    file.write("</tr>\n")
+    for row in rows:
+        file.write("<tr>")
+        for cell in row:
+            file.write(f"<td style='padding: 5px;'>{cell}</td>")
+        file.write("</tr>\n")
+    file.write("</table>\n</body>\n</html>")
+
 # =====================NAV BAR========================
 # Author: Ajmira
 # dictionary -> html code
 # Writes the code for a navbar given a dictionary
-# Should show the navbar as well as a dropdown section, clicking on a section will take you to the respective page
+# Should show the navbar as well as a dropdown section
+#clicking on a section will take you to the respective page
 
 nav_bar_css = '''
 nav {
@@ -152,6 +177,9 @@ def create_nav(D2):
 # =====================END NAV BAR========================
 
 # ======================HOME PAGE========================
+#Author: Nate
+#writes files needed for the project
+# thats it! it should open new files!!
 
 home_html = '''
     <link rel="stylesheet" href="Home.css" />
@@ -219,9 +247,6 @@ html, body {
 }
 '''
 
-#Nate wrote these codes (hey they count as functions!!)
-#writes files needed for the project
-# thats it! it should open new files!!
 with open("Home.html", "w") as f:
     f.write('<!DOCTYPE html>\n<html lang="en">\n\t<head>\n\t\t<title>Home</title>\n')
     f.write(create_nav(D2))
@@ -234,54 +259,15 @@ with open("Home.css", "w") as f:
 
 # ======================END HOME PAGE========================
 
-# =====================POKEDEX========================
-# utilizes pokemon_list from line 14
-# some code was inspired/debugged by AI or StackExchange
-headers = pokemon_list[0]
-rows = pokemon_list[1:]
-
-with open('pokedex.html', 'w') as file:
-    file.write("<!DOCTYPE html>\n<html>\n<head>\n<title>All Pokemon</title>\n</head>\n<body>\n<h1>All Pokemon</h1>\n<table border='1' style='border-collapse: collapse;'>\n")
-    file.write("<tr>")
-    for header in headers:
-        file.write(f"<th style='padding: 5px;'>{header}</th>")
-    file.write("</tr>\n")
-    for row in rows:
-        file.write("<tr>")
-        for cell in row:
-            file.write(f"<td style='padding: 5px;'>{cell}</td>")
-        file.write("</tr>\n")
-    file.write("</table>\n</body>\n</html>")
-
-# ======================END POKEDEX========================
-
-# =====================TYPE========================
-for type in D2:
-    pokemons = D2[type]
-    with open(type + ".html", "w") as f:
-        f.write("<!DOCTYPE html>\n<html>\n<head>\n<title>" + type + " Type Pokemon</title>\n</head>\n<body>\n")
-        f.write("<h1>" + type + " Type Pokemon</h1>\n")
-        if len(pokemons) > 0:
-            headers = list(list(pokemons.values())[0].keys())
-            f.write("<table border='1' style='border-collapse: collapse;'>\n<tr>")
-            for header in headers:
-                f.write("<th style='padding: 5px;'>" + header + "</th>")
-            f.write("</tr>\n")
-            for name in pokemons:
-                pokemon = pokemons[name]
-                f.write("<tr>")
-                for header in headers:
-                    f.write("<td style='padding: 5px;'>" + pokemon[header] + "</td>")
-                f.write("</tr>\n")
-            f.write("</table>\n")
-        else:
-            f.write("<p>No Pokemon of this type.</p>\n")
-        f.write("</body>\n</html>")
-
-# =====================END TYPE========================
+for type in D2.keys():
+    with open(f"{type}.html", "w") as f:
+        f.write(f"<html><head><title>{type}<title><head><html>\n")
 
 with open("top10.html", "w") as f:
     f.write('<html><head><title>Top 10<title><head><html>\n')
+
+with open("Pokedex.html", "w") as f:
+    f.write('<html><head><title>Pokedex<title><head><html>\n')
 
 
 
@@ -291,11 +277,11 @@ with open("top10.html", "w") as f:
 
 
 ### CODE GRAVEYARD
+#Author: Ajmira
 # list -> dictionary
 #function turns a 2D list into a dictionary where keys are types and values are list of a lists of characters
 #[['Hello'],['So','fun!'],['This','should','work!']['1']] ->
 #{Grass:[[1,'Bulbauser',...]...]}
-#Author is Ajmira
 
 '''
 def turn_dict(twodlist):
