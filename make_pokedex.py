@@ -95,7 +95,7 @@ with open('all.html', 'w') as file:
 
 
 html_code = '''
-    <link rel="stylesheet" href="testHome.css" />
+    <link rel="stylesheet" href="Home.css" />
     </head>
     <body>
          <div class="background"></div>
@@ -104,8 +104,9 @@ html_code = '''
          <h3>Nathaniel Moy, Alex Zheng, Ajmira Islam</h3>
          <div class="intro-text">
              <p>
-             An introduction to Pokemon, as if you the viewer didn't already know what that was.
+             A reference guide for 151 pokemon characters of varying types and categories. This guide comes with multiple sections, a whole Pokedex for all 151 characters, a Top 10 section of our personally curated selection of pokemon, and sections for each type of pokemon.
              </p>
+             <div style="height:300px;"></div>
              <h3>Snorlax</h3>
              <p>We chose Snorlax as our first partner pokemon because it is what we all aspire to be after our APs at Stuy, but are strictly prohibited from becoming.</p>
          </div>
@@ -178,7 +179,7 @@ nav ul li ul.dropdown li a:hover {
 }
 '''
 
-css_code = '''
+home_css = '''
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
 
 html, body {
@@ -216,10 +217,10 @@ html, body {
 }
 
 .intro-text {
-    font-size: 0.85em;
+    font-size: 0.75em;
     color: white;
-    max-width: 600px;
-    margin: 10px auto;
+    max-width: 1000px;
+    margin: 300px auto 200px;
     line-height: 1.4;
 }
 '''
@@ -254,7 +255,7 @@ with open("Home.html", "w") as f:
 
 with open("Home.css", "w") as f:
     f.write('\n')
-    f.write(css_code)
+    f.write(home_css)
     f.write(nav_bar_css)
 
 for type in D2.keys():
