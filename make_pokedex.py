@@ -1,7 +1,7 @@
 from pprint import pprint
 #paste the output (or pipe the output) of this program to the pokedex.html file.
 
-text = open('test.csv').read().strip().split('\n')
+text = open('pokemon.csv').read().strip().split('\n')
 
 #print(text)
 
@@ -62,7 +62,7 @@ def dict2(twodic):
     return d
 
 D2 = dict2(pokemon_list)
-pprint(D2)
+print(D2)
 
 # ====================ALL POKEMON========================
 # utilizes pokemon_list from line 14
@@ -122,27 +122,36 @@ nav_bar = '''
 '''
 
 nav_bar_css = '''
+nav {
+  top: 0;
+  left: 0;
+  width: 100%;
+  background-color: rgba(255, 255, 255, 0.1); 
+  backdrop-filter: blur(4px);
+  z-index: 10;
+  position: relative;
+}
 nav ul {
   list-style-type: none;
   margin: 0;
   padding: 0;
-  background-color: transparent;
   display: flex;
   justify-content: flex-end;
-  position: relative;
 }
 
 nav ul li {
   position: relative;
+  z-index: 1000; 
 }
 
 nav ul li a {
   display: block;
-  color: black;
+  color: white;
   padding: 20px 30px;
   text-decoration: none;
   font-size: 20px;
   font-family: "Montserrat";
+  z-index: 1000; 
 }
 
 nav ul li:hover > a {
@@ -156,7 +165,7 @@ nav ul li ul.dropdown {
   left: 0;
   background-color: #333;
   min-width: 160px;
-  z-index: 1000;
+  z-index: 9999; 
   flex-direction: column;
 }
 
@@ -169,6 +178,7 @@ nav ul li ul.dropdown li a {
   padding: 12px 16px;
   background-color: #333;
   text-align: left;
+  z-index: 1000; 
 }
 
 nav ul li ul.dropdown li a:hover {
@@ -177,18 +187,40 @@ nav ul li ul.dropdown li a:hover {
 '''
 
 css_code = '''
-
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+
+html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    overflow-x: hidden;
+    overflow-y: auto;
+    background: transparent;
+}
+
+
+.background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: url("home.jpg") no-repeat center center fixed;
+    background-size: cover;
+    filter: blur(8px);
+    -webkit-filter: blur(8px);
+    z-index: -1;
+}
 
 .content {
     position: relative;
-    top: 100px;
-    transform: none;
+    padding-top: 100px;
     color: white;
     text-align: center;
     z-index: 1;
     font-size: 50px;
     font-family: "Montserrat";
+    overflow: visible; 
 }
 
 .intro-text {
@@ -198,19 +230,8 @@ css_code = '''
     margin: 10px auto;
     line-height: 1.4;
 }
+'''
 
-
-.background {
-    position: fixed;
-    width: 100%;
-    height: 100%;
-    background: url("home.jpg") no-repeat fixed center;
-    background-size: cover;
-    filter: blur(8px);
-    -webkit-filter: blur(8px);
-    z-index: 0;
-    }
-    '''
 
 #Author is Ajmira
 #dictionary-> html code
