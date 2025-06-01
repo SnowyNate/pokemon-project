@@ -113,14 +113,6 @@ html_code = '''
     </body>
     '''
 
-nav_bar = '''
-    <ul>
-        <li><a href="testHome.html">Home</a></li>
-        <li><a href="Pokedex.html">Pokedex</a></li>
-        <li><a href="top10.html">Top 10</a></li>
-    </ul>
-'''
-
 nav_bar_css = '''
 nav {
   top: 0;
@@ -240,7 +232,7 @@ html, body {
 #should show the navbar and dropdown and clicking on it will take you to the respective page
 def create_nav(D2):
     html = "<nav><ul>"
-    html += "<li><a href='testHome.html'>Home</a></li>"
+    html += "<li><a href='Home.html'>Home</a></li>"
     html += "<li><a href='#'>Types</a><ul class='dropdown'>"
 
     for x in D2.keys():
@@ -255,12 +247,12 @@ def create_nav(D2):
 #Nate wrote these codes (hey they count as functions!!)
 #writes files needed for the project
 # thats it! it should open new files!!
-with open("testHome.html", "w") as f:
+with open("Home.html", "w") as f:
     f.write('<!DOCTYPE html>\n<html lang="en">\n\t<head>\n\t\t<title>Home</title>\n')
     f.write(create_nav(D2))
     f.write(html_code)
 
-with open("testHome.css", "w") as f:
+with open("Home.css", "w") as f:
     f.write('\n')
     f.write(css_code)
     f.write(nav_bar_css)
