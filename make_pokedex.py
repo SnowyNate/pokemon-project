@@ -26,7 +26,7 @@ def make_list(s):
 
 pokemon_list = make_list(text)
 
-print(pokemon_list[:5])
+#print(pokemon_list[:5])
 
 
 # =====================Dictionary========================
@@ -43,7 +43,7 @@ print(pokemon_list[:5])
 '''
 {'Grass':{'Bulbasaur': {'#': '1', 'Name': 'Bulbasaur',...}...}...}
 '''
-
+'''
 def dict2(twodic):
     d = {}
     headers = twodic[0]
@@ -58,7 +58,7 @@ def dict2(twodic):
             d[type1] = {}
         d[type1][name] = dict(zip(headers, data))
 
-        if type2 != "''":
+        if type2 != "":
             if type2 not in d:
                 d[type2] = {}
             d[type2][name] = dict(zip(headers, data))
@@ -66,25 +66,60 @@ def dict2(twodic):
     return d
 
 D2 = dict2(pokemon_list)
-print(D2)
+'''
+def get_types():
+    types_list = []
+    for pokemon in pokemon_list[1:]:
+        if pokemon[2] == '' or pokemon[3] =='':
+            continue
+        if pokemon[2] not in types_list:
+            types_list.append(pokemon[2])
+        if pokemon[3] not in types_list:
+            types_list.append(pokemon[3])
+    return types_list
+D2 = get_types()
+#pprint(D2)
+def get_type_data(type):
+    type_list = []
+    for pokemon in pokemon_list[1:]:
+        if pokemon[2] == type or pokemon[3] == type:
+            type_list.append(pokemon)
+    return type_list
+            
+#pprint(get_type_data('Grass'))
 
+headers = pokemon_list[0]
+rows = pokemon_list[1:]
+
+def get_type_page(type):
+    page = ''
+    page +=f'''<!DOCTYPE html>\n<html>\n<head>\n<title>{type} Pokemon</title>\n</head>\n<body>\n<h1>{type} Pokemon</h1>\n<table>\n'''
+    page += "<tr>"
+    for header in headers:
+        page += f"<th>{header}</th>"
+    for row in get_type_data(type):
+        page += "<tr>"
+        for cell in row:
+            page += f"<td>{cell}</td>"
+        page += "</tr>\n"
+    page += "</table>\n</body>\n</html>"
+    return page
+        
 # ====================ALL POKEMON========================
 #Author: Nate
 # utilizes pokemon_list from line 14
 # some code was inspired/debugged by AI or StackExchange
-headers = pokemon_list[0]
-rows = pokemon_list[1:]
 
 with open('all.html', 'w') as file:
-    file.write("<!DOCTYPE html>\n<html>\n<head>\n<title>All Pokemon</title>\n</head>\n<body>\n<h1>All Pokemon</h1>\n<table border='1' style='border-collapse: collapse;'>\n")
+    file.write("<!DOCTYPE html>\n<html>\n<head>\n<title>All Pokemon</title>\n</head>\n<body>\n<h1>All Pokemon</h1>\n<table>\n")
     file.write("<tr>")
     for header in headers:
-        file.write(f"<th style='padding: 5px;'>{header}</th>")
+        file.write(f"<th>{header}</th>")
     file.write("</tr>\n")
     for row in rows:
         file.write("<tr>")
         for cell in row:
-            file.write(f"<td style='padding: 5px;'>{cell}</td>")
+            file.write(f"<td>{cell}</td>")
         file.write("</tr>\n")
     file.write("</table>\n</body>\n</html>")
 
@@ -165,7 +200,7 @@ def create_nav(D2):
     html += "<li><a href='Home.html'>Home</a></li>"
     html += "<li><a href='#'>Types</a><ul class='dropdown'>"
 
-    for x in D2.keys():
+    for x in D2:
         html += f"<li><a href='{x}.html'>{x}</a></li>"
 
     html += "</ul></li>"  # close dropdown
@@ -245,6 +280,10 @@ html, body {
     margin: 300px auto 200px;
     line-height: 1.4;
 }
+
+p{
+color: white;
+
 '''
 
 with open("Home.html", "w") as f:
@@ -259,19 +298,15 @@ with open("Home.css", "w") as f:
 
 # ======================END HOME PAGE========================
 
-for type in D2.keys():
+for type in D2:
     with open(f"{type}.html", "w") as f:
-        f.write(f"<html><head><title>{type}<title><head><html>\n")
+        f.write(get_type_page(type))
 
 with open("top10.html", "w") as f:
     f.write('<html><head><title>Top 10<title><head><html>\n')
 
 with open("Pokedex.html", "w") as f:
     f.write('<html><head><title>Pokedex<title><head><html>\n')
-
-
-
-
 
 
 
