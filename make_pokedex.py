@@ -257,6 +257,28 @@ with open('pokedex.html', 'w') as file:
         file.write("</tr>\n")
     file.write("</table>\n</body>\n</html>")
 
+# ----------------------GETTING NUMBERS FROM DICTIONARY----------------------
+#Author: Ajmira
+#a complex dictionary -> a simpler dictionary
+#Taking the dictionary, we'd make a similar one
+#only we'd have a list of numbers as the value
+#types will be keys
+#{'Grass':['1','2'...]...}
+
+def get_num(two_dic):
+    simpler = {}
+    for typ in two_dic:
+        x = two_dic[typ]
+        for name in x:
+            y = x[name]
+            if typ in simpler:
+                simpler[typ].append(y["#"])
+            else:
+                simpler[typ] = [y["#"]]
+    return simpler
+# -----------------END GETTING NUMBERS FROM DICTIONARY-----------------
+
+print(get_num(D2))
 # ======================END POKEDEX========================
 
 # =====================TYPE========================
