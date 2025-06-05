@@ -123,6 +123,29 @@ with open('all.html', 'w') as file:
         file.write("</tr>\n")
     file.write("</table>\n</body>\n</html>")
 
+# =========Getting Numbers From Dictionary============
+#Author: Ajmira
+#a complex dictionary -> a simpler dictionary
+#Taking the dictionary, we'd make a similar one
+#only we'd have a list of numbers as the value
+#types will be keys
+#{'Grass':['1','2'...]...}
+
+def get_num(two_dic):
+    simpler = {}
+    for typ in two_dic:
+        x = two_dic[typ]
+        for name in x:
+            y = x[name]
+            if typ in simpler:
+                simpler[typ].append(y["#"])
+            else:
+                simpler[typ] = [y["#"]]
+    return simpler
+        
+
+print(get_num(D2))
+
 # =====================NAV BAR========================
 # Author: Ajmira
 # dictionary -> html code
@@ -285,6 +308,11 @@ p{
 color: white;
 
 '''
+type_css = '''
+body {
+    background
+}
+'''
 
 with open("Home.html", "w") as f:
     f.write('<!DOCTYPE html>\n<html lang="en">\n\t<head>\n\t\t<title>Home</title>\n')
@@ -298,6 +326,33 @@ with open("Home.css", "w") as f:
 
 # ======================END HOME PAGE========================
 
+<<<<<<< Updated upstream
+=======
+# =====================POKEDEX========================
+# utilizes pokemon_list from line 14
+# some code was inspired/debugged by AI or StackExchange
+headers = pokemon_list[0]
+rows = pokemon_list[1:]
+
+with open('pokedex.html', 'w') as file:
+    file.write("<!DOCTYPE html>\n<html>\n<head>\n<title>All Pokemon</title>\n</head>\n<body>\n<h1>All Pokemon</h1>\n<table border='1' style='border-collapse: collapse;'>\n")
+    file.write("<tr>")
+    for header in headers:
+        file.write(f"<th style='padding: 5px;'>{header}</th>")
+    file.write("</tr>\n")
+    for row in rows:
+        file.write("<tr>")
+        for cell in row:
+            file.write(f"<td style='padding: 5px;'>{cell}</td>")
+        file.write("</tr>\n")
+    file.write("</table>\n</body>\n</html>")
+
+# ======================END POKEDEX========================
+
+# =====================TYPE========================
+        
+
+>>>>>>> Stashed changes
 for type in D2:
     with open(f"{type}.html", "w") as f:
         f.write(get_type_page(type))
