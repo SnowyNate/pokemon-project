@@ -32,14 +32,22 @@ print(pokemon_list[:5])
 
 # ======================DICTIONARY========================
 #Author is Alex
+# ======================END 2D LIST========================
+
+# ======================DICTIONARY========================
+#Author is Alex
 #list -> dictionary
 #takes a 2d list and returns a dictionary in a dictionary (Alex cooked it and did one in a dictionary in a dictionary)
 #It also assigns parts of the header to the actual value
 
 # Originally:
+
+# Originally:
 '''
 {'Grass': {'Bulbasaur':['#: 1', 'Name: Bulbauaur'....]...}....}
+{'Grass': {'Bulbasaur':['#: 1', 'Name: Bulbauaur'....]...}....}
 '''
+# Now:
 # Now:
 '''
 {'Grass':{'Bulbasaur': {'#': '1', 'Name': 'Bulbasaur',...}...}...}
@@ -63,7 +71,8 @@ def dict2(twodic):
             if type2 not in d:
                 d[type2] = {}
             d[type2][name] = dict(zip(headers, data))
-
+    d.pop('')
+    print(d.keys())
     return d
 
 D2 = dict2(pokemon_list)
@@ -73,6 +82,8 @@ print(D2)
 # Author: Ajmira
 # dictionary -> html code
 # Writes the code for a navbar given a dictionary
+# Should show the navbar as well as a dropdown section,
+# clicking on a section will take you to the respective page
 # Should show the navbar as well as a dropdown section,
 # clicking on a section will take you to the respective page
 
@@ -160,6 +171,8 @@ def create_nav(D2):
 # ======================HOME PAGE========================
 # Author: Nathaniel
 # Outputs html code in an html file named "Home.html"
+# Author: Nathaniel
+# Outputs html code in an html file named "Home.html"
 home_html = '''
     <link rel="stylesheet" href="Home.css" />
     </head>
@@ -226,6 +239,35 @@ html, body {
 }
 '''
 
+type_css = '''
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+.background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: url("pokepic.jpeg") no-repeat center center fixed;
+    background-size: cover;
+    filter: blur(8px);
+    -webkit-filter: blur(8px);
+    z-index: -1;
+}
+
+table {
+background-color: rgba(255, 255, 255, .4);
+font-family: "Montserrat";
+  margin-left: auto;
+  margin-right: auto;
+  color: black;
+}
+h1{
+color: white;
+font-family: Montserrat;
+text-align: center;}
+
+'''
+
 with open("Home.html", "w") as f:
     f.write('<!DOCTYPE html>\n<html lang="en">\n\t<head>\n\t\t<title>Home</title>\n')
     f.write(create_nav(D2))
@@ -234,6 +276,11 @@ with open("Home.html", "w") as f:
 with open("Home.css", "w") as f:
     f.write('\n')
     f.write(home_css)
+    f.write(nav_bar_css)
+    
+with open("Type.css", "w") as f:
+    f.write('\n')
+    f.write(type_css)
     f.write(nav_bar_css)
 
 # ======================END HOME PAGE========================
@@ -245,7 +292,9 @@ headers = pokemon_list[0]
 rows = pokemon_list[1:]
 
 with open('pokedex.html', 'w') as file:
-    file.write("<!DOCTYPE html>\n<html>\n<head>\n<title>All Pokemon</title>\n</head>\n<body>\n<h1>All Pokemon</h1>\n<table border='1' style='border-collapse: collapse;'>\n")
+    file.write("<!DOCTYPE html>\n<html>\n<head>\n<title>All Pokemon</title>\n</head>\n<body>\n<div class='background'></div>\n<link rel='stylesheet' href='AllPokemon.css'/>")
+    file.write(create_nav(D2))
+    file.write("<h1>All Pokemon</h1>\n<table border='1' style='border-collapse: collapse;'>\n")
     file.write("<tr>")
     for header in headers:
         file.write(f"<th style='padding: 5px;'>{header}</th>")
@@ -256,6 +305,38 @@ with open('pokedex.html', 'w') as file:
             file.write(f"<td style='padding: 5px;'>{cell}</td>")
         file.write("</tr>\n")
     file.write("</table>\n</body>\n</html>")
+
+pokedex_css = '''
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+.background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: url("poke.jpg") no-repeat center center fixed;
+    background-size: cover;
+    filter: blur(8px);
+    -webkit-filter: blur(8px);
+    z-index: -1;
+}
+
+table {
+background-color: rgba(255, 255, 255, .4);
+font-family: "Montserrat";
+  margin-left: auto;
+  margin-right: auto;
+  color: black;
+}
+h1{
+color: white;
+font-family: Montserrat;
+text-align: center;}
+'''
+with open("AllPokemon.css","w") as f:
+    f.write('\n')
+    f.write(pokedex_css)
+    f.write(nav_bar_css)
 
 # ----------------------GETTING NUMBERS FROM DICTIONARY----------------------
 #Author: Ajmira
@@ -276,16 +357,29 @@ def get_num(two_dic):
             else:
                 simpler[typ] = [y["#"]]
     return simpler
+num_dic = get_num(D2)
+print(num_dic)
+
+#Author: Ajmira
+#string->string
+#takes a number, returns the name of the respective image
+def get_pic(x):
+    pic = x + ".png"
+    return pic
+print(get_pic('5'))
+#should print "5.png"
+    
 # -----------------END GETTING NUMBERS FROM DICTIONARY-----------------
 
-print(get_num(D2))
 # ======================END POKEDEX========================
 
 # =====================TYPE========================
 for type in D2:
     pokemons = D2[type]
     with open(type + ".html", "w") as f:
-        f.write("<!DOCTYPE html>\n<html>\n<head>\n<title>" + type + " Type Pokemon</title>\n</head>\n<body>\n")
+        f.write('<!DOCTYPE html>\n<html>\n<head>\n<title>" + type + " Type Pokemon</title>\n</head>\n<body>\n<div class="background"></div>\n')
+        f.write(create_nav(D2))
+        f.write('<link rel="stylesheet" href="Type.css" />')
         f.write("<h1>" + type + " Type Pokemon</h1>\n")
         if len(pokemons) > 0:
             headers = list(list(pokemons.values())[0].keys())
@@ -307,8 +401,23 @@ for type in D2:
 # =====================END TYPE========================
 
 with open("top10.html", "w") as f:
-    f.write('<html><head><title>Top 10<title><head><html>\n')
-
+    f.write('<!DOCTYPE html>\n<html><head><title>Top 10</title></head><body>\n<div class="background"></div>\n')
+    f.write(create_nav(D2))
+    f.write("<h1>Top 10</h1>\n<table border='1' style='border-collapse: collapse;'>\n")
+    f.write("<tr>")
+    for header in headers:
+        f.write(f"<th style='padding: 5px;'>{header}</th>")
+    f.write(f"<th style='padding: 5px;'>Front</th>")
+    f.write(f"<th style='padding: 5px;'>Back</th>")
+    f.write("</tr>\n")
+    for row in rows:
+        f.write("<tr>")
+        for cell in row:
+            f.write(f"<td style='padding: 5px;'>{cell}</td>")
+        f.write(f"<td style='padding: 5px;'><img src='/img/back/5.png' alt='broke down'></td>")
+        f.write(f"<td style='padding: 5px;'>Image</td>")
+        f.write("</tr>\n")
+    f.write("</table>\n</body>\n</html>")
 
 
 
@@ -317,6 +426,7 @@ with open("top10.html", "w") as f:
 
 
 ### CODE GRAVEYARD
+# Author: Ajmira
 # Author: Ajmira
 # list -> dictionary
 #function turns a 2D list into a dictionary where keys are types and values are list of a lists of characters
