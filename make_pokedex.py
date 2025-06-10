@@ -389,12 +389,17 @@ for type in D2:
         if len(pokemons) > 0:
             headers = list(list(pokemons.values())[0].keys())
             f.write("<table border='1' style='border-collapse: collapse;'>\n<tr>")
+            f.write("<th style='padding: 5px;'>Front</th>")
+            f.write("<th style='padding: 5px;'>Back</th>")
             for header in headers:
                 f.write("<th style='padding: 5px;'>" + header + "</th>")
             f.write("</tr>\n")
             for name in pokemons:
                 pokemon = pokemons[name]
+                number = pokemon["#"]
                 f.write("<tr>")
+                f.write(f"<td style='padding: 5px;'><img src='img/front/{number}.png' alt='Front {number}' style='width:50px;'></td>")
+                f.write(f"<td style='padding: 5px;'><img src='img/back/{number}.png' alt='Back {number}' style='width:50px;'></td>")
                 for header in headers:
                     f.write("<td style='padding: 5px;'>" + pokemon[header] + "</td>")
                 f.write("</tr>\n")
