@@ -296,11 +296,16 @@ with open('pokedex.html', 'w') as file:
     file.write(create_nav(D2))
     file.write("<h1>All Pokemon</h1>\n<table border='1' style='border-collapse: collapse;'>\n")
     file.write("<tr>")
+    file.write("<th style='padding: 5px;'>Front</th>")
+    file.write("<th style='padding: 5px;'>Back</th>")
     for header in headers:
         file.write(f"<th style='padding: 5px;'>{header}</th>")
     file.write("</tr>\n")
     for row in rows:
+        number = row[0]
         file.write("<tr>")
+        file.write(f"<td style='padding: 5px;'><img src='img/front/{number}.png' alt='Front {number}' style='width:50px;'></td>")
+        file.write(f"<td style='padding: 5px;'><img src='img/back/{number}.png' alt='Back {number}' style='width:50px;'></td>")
         for cell in row:
             file.write(f"<td style='padding: 5px;'>{cell}</td>")
         file.write("</tr>\n")
