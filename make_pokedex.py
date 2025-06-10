@@ -409,24 +409,38 @@ for type in D2:
         f.write("</body>\n</html>")
 
 # =====================END TYPE========================
+top_10_pokemon = [
+    "Snorlax", "Bulbasaur", "Pikachu", "Moltres", "Rayquaza",
+    "Charizard", "Psyduck", "Squirtle", "Machoke", "Magikarp"
+]
+
+
+name_to_row = {row[1]: row for row in rows}  
+
+
+filtered_rows = [name_to_row[name] for name in top_10_pokemon if name in name_to_row]
 
 with open("top10.html", "w") as f:
     f.write('<!DOCTYPE html>\n<html><head><title>Top 10</title></head><body>\n<div class="background"></div>\n')
+    f.write('<link rel="stylesheet" href="AllPokemon.css"/>\n')  
     f.write(create_nav(D2))
     f.write("<h1>Top 10</h1>\n<table border='1' style='border-collapse: collapse;'>\n")
     f.write("<tr>")
+    f.write("<th style='padding: 5px;'>Front</th>")
+    f.write("<th style='padding: 5px;'>Back</th>")
     for header in headers:
         f.write(f"<th style='padding: 5px;'>{header}</th>")
-    f.write(f"<th style='padding: 5px;'>Front</th>")
-    f.write(f"<th style='padding: 5px;'>Back</th>")
     f.write("</tr>\n")
-    for row in rows:
+
+    for row in filtered_rows:
+        number = row[0]
         f.write("<tr>")
+        f.write(f"<td style='padding: 5px;'><img src='img/front/{number}.png' alt='Front {number}' style='width:50px;'></td>")
+        f.write(f"<td style='padding: 5px;'><img src='img/back/{number}.png' alt='Back {number}' style='width:50px;'></td>")
         for cell in row:
             f.write(f"<td style='padding: 5px;'>{cell}</td>")
-        f.write(f"<td style='padding: 5px;'><img src='/img/back/5.png' alt='broke down'></td>")
-        f.write(f"<td style='padding: 5px;'>Image</td>")
         f.write("</tr>\n")
+    
     f.write("</table>\n</body>\n</html>")
 
 
