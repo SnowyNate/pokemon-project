@@ -1,3 +1,5 @@
+# Nathaniel, Ajmira, Alex
+
 from pprint import pprint
 #paste the output (or pipe the output) of this program to the pokedex.html file.
 
