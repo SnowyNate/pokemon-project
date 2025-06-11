@@ -144,7 +144,7 @@ nav ul li ul.dropdown li a:hover {
 
 def create_nav(D2):
     html = "<nav><ul>"
-    html += "<li><a href='Home.html'>Home</a></li>"
+    html += "<li><a href='home.html'>Home</a></li>"
     html += "<li><a href='#'>Types</a><ul class='dropdown'>"
 
     for x in D2.keys():
@@ -152,7 +152,7 @@ def create_nav(D2):
 
     html += "</ul></li>"  # close dropdown
     html += "<li><a href='top10.html'>Top 10</a></li>"
-    html += "<li><a href='Pokedex.html'>Pokedex</a></li>"
+    html += "<li><a href='pokedex.html'>Pokedex</a></li>"
     html += "</ul></nav>"
     return html
 
@@ -160,9 +160,9 @@ def create_nav(D2):
 
 # ======================HOME PAGE========================
 # Author: Nathaniel
-# Outputs html code in an html file named "Home.html"
+# Outputs html code in an html file named "home.html"
 home_html = '''
-    <link rel="stylesheet" href="Home.css" />
+    <link rel="stylesheet" href="home.css" />
     </head>
     <body>
          <div class="background"></div>
@@ -265,17 +265,17 @@ text-align: center;}
 
 '''
 
-with open("Home.html", "w") as f:
+with open("home.html", "w") as f:
     f.write('<!DOCTYPE html>\n<html lang="en">\n\t<head>\n\t\t<title>Home</title>\n')
     f.write(create_nav(D2))
     f.write(home_html)
 
-with open("Home.css", "w") as f:
+with open("home.css", "w") as f:
     f.write('\n')
     f.write(home_css)
     f.write(nav_bar_css)
     
-with open("Type.css", "w") as f:
+with open("type.css", "w") as f:
     f.write('\n')
     f.write(type_css)
     f.write(nav_bar_css)
@@ -413,7 +413,7 @@ for type in D2:
     with open(type + ".html", "w") as f:
         f.write('<!DOCTYPE html>\n<html>\n<head>\n<title>" + type + " Type Pokemon</title>\n</head>\n<body>\n<div class="background"></div>\n')
         f.write(create_nav(D2))
-        f.write('<link rel="stylesheet" href="Type.css" />')
+        f.write('<link rel="stylesheet" href="type.css" />')
         f.write("<h1>" + type + " Type Pokemon</h1>\n")
         if len(pokemons) > 0:
             headers = list(list(pokemons.values())[0].keys())
