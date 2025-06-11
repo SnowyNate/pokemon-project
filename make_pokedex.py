@@ -174,8 +174,15 @@ home_html = '''
              <div style="height:300px;"></div>
              <h3>Snorlax</h3>
              <p>We chose Snorlax as our first partner pokemon because it is what we all aspire to be after our APs at Stuy, but are strictly prohibited from becoming.</p>
+             <div style="height:300px;"></div>
              <h3> Top Ten </h3>
              <p> Snorlax takes its place as first for a very obvious reason. Then Bulbasaur is second since Ajmira knew him since she was a child, perhaps before she knew Pikachu. Pikachu is the mascot of Pokemon. Moltres is close to a phoenix. Psyduck 'cause we ALL have a headache in Stuy. Charizard because he's a flying dragon, what's not to love about him? Squirtle is cute. Machoke cause peak human physique (Alex's words). Magikarp because fish. And finally Vaporeon because the spinner chose him over Eevee.
+             <div style="position: fixed; bottom: 20px; right: 40px;">
+                <a href="https://github.com/SnowyNate/pokemon-project" target="_blank">
+                    <img src="https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png" alt="GitHub" style="width:60px; height:auto; border-radius: 50%;">
+                </a>
+         </div>
+         </div>
          </div>
          </div>
     </body>
