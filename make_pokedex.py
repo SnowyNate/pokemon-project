@@ -32,22 +32,14 @@ print(pokemon_list[:5])
 
 # ======================DICTIONARY========================
 #Author is Alex
-# ======================END 2D LIST========================
-
-# ======================DICTIONARY========================
-#Author is Alex
 #list -> dictionary
 #takes a 2d list and returns a dictionary in a dictionary (Alex cooked it and did one in a dictionary in a dictionary)
 #It also assigns parts of the header to the actual value
 
 # Originally:
-
-# Originally:
 '''
-{'Grass': {'Bulbasaur':['#: 1', 'Name: Bulbauaur'....]...}....}
-{'Grass': {'Bulbasaur':['#: 1', 'Name: Bulbauaur'....]...}....}
+{'Grass': {'Bulbasaur':['#: 1', 'Name: Bulbasaur'....]...}....}
 '''
-# Now:
 # Now:
 '''
 {'Grass':{'Bulbasaur': {'#': '1', 'Name': 'Bulbasaur',...}...}...}
@@ -67,23 +59,19 @@ def dict2(twodic):
             d[type1] = {}
         d[type1][name] = dict(zip(headers, data))
 
-        if type2 != "''":
+        if type2 != "":
             if type2 not in d:
                 d[type2] = {}
             d[type2][name] = dict(zip(headers, data))
-    d.pop('')
-    print(d.keys())
     return d
 
 D2 = dict2(pokemon_list)
 print(D2)
-
+print(D2.keys())
 # =====================NAV BAR========================
 # Author: Ajmira
 # dictionary -> html code
 # Writes the code for a navbar given a dictionary
-# Should show the navbar as well as a dropdown section,
-# clicking on a section will take you to the respective page
 # Should show the navbar as well as a dropdown section,
 # clicking on a section will take you to the respective page
 
@@ -171,8 +159,6 @@ def create_nav(D2):
 # ======================HOME PAGE========================
 # Author: Nathaniel
 # Outputs html code in an html file named "Home.html"
-# Author: Nathaniel
-# Outputs html code in an html file named "Home.html"
 home_html = '''
     <link rel="stylesheet" href="Home.css" />
     </head>
@@ -188,6 +174,8 @@ home_html = '''
              <div style="height:300px;"></div>
              <h3>Snorlax</h3>
              <p>We chose Snorlax as our first partner pokemon because it is what we all aspire to be after our APs at Stuy, but are strictly prohibited from becoming.</p>
+             <h3> Top Ten </h3>
+             <p> Snorlax takes its place as first for a very obvious reason. Then Bulbasaur is second since Ajmira knew him since she was a child, perhaps before she knew Pikachu. Pikachu is the mascot of Pokemon. Moltres is close to a phoenix. Psyduck 'cause we ALL have a headache in Stuy. Charizard because he's a flying dragon, what's not to love about him? Squirtle is cute. Machoke cause peak human physique (Alex's words). Magikarp because fish. And finally Vaporeon because the spinner chose him over Eevee.
          </div>
          </div>
     </body>
@@ -343,6 +331,38 @@ with open("AllPokemon.css","w") as f:
     f.write(pokedex_css)
     f.write(nav_bar_css)
 
+top_css = '''
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+.background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: url("topten.jpg") no-repeat center center fixed;
+    background-size: cover;
+    filter: blur(8px);
+    -webkit-filter: blur(8px);
+    z-index: -1;
+}
+
+table {
+background-color: rgba(255, 255, 255, .4);
+font-family: "Montserrat";
+  margin-left: auto;
+  margin-right: auto;
+  color: black;
+}
+h1{
+color: white;
+font-family: Montserrat;
+text-align: center;}
+
+'''
+with open("TopTen.css","w") as f:
+    f.write('\n')
+    f.write(top_css)
+    f.write(nav_bar_css)
 # ----------------------GETTING NUMBERS FROM DICTIONARY----------------------
 #Author: Ajmira
 #a complex dictionary -> a simpler dictionary
@@ -410,8 +430,8 @@ for type in D2:
 
 # =====================END TYPE========================
 top_10_pokemon = [
-    "Snorlax", "Bulbasaur", "Pikachu", "Moltres", "Rayquaza",
-    "Charizard", "Psyduck", "Squirtle", "Machoke", "Magikarp"
+    "Snorlax", "Bulbasaur", "Pikachu", "Moltres", "Charizard",
+    "Psyduck", "Squirtle", "Machoke", "Magikarp", "Vaporeon"
 ]
 
 
@@ -422,7 +442,7 @@ filtered_rows = [name_to_row[name] for name in top_10_pokemon if name in name_to
 
 with open("top10.html", "w") as f:
     f.write('<!DOCTYPE html>\n<html><head><title>Top 10</title></head><body>\n<div class="background"></div>\n')
-    f.write('<link rel="stylesheet" href="AllPokemon.css"/>\n')  
+    f.write('<link rel="stylesheet" href="TopTen.css"/>\n')  
     f.write(create_nav(D2))
     f.write("<h1>Top 10</h1>\n<table border='1' style='border-collapse: collapse;'>\n")
     f.write("<tr>")
@@ -450,7 +470,6 @@ with open("top10.html", "w") as f:
 
 
 ### CODE GRAVEYARD
-# Author: Ajmira
 # Author: Ajmira
 # list -> dictionary
 #function turns a 2D list into a dictionary where keys are types and values are list of a lists of characters
